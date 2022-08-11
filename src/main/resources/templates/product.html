@@ -92,7 +92,7 @@
             <div class=""row>
           <p class="product" th:text="${product.title}"></p>
           <p class="price">Price:</p>
-          <p class="price-tag product-price" th:text="${product.price}"></p>
+          <p class="price-tag product-price" th:text="${product.price}" th:text="${product.moneda}"></p>
           <button type="button" class="button">Add to cart</button>
         </div>
       </div>

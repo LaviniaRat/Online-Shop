@@ -14,7 +14,7 @@ public class OnlineShopService {
 
     }
 
-    private Connection connectTodb(String dbname, String user, String password) {
+    private void connectTodb(String dbname, String user, String password) {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, user, password);
@@ -23,7 +23,6 @@ public class OnlineShopService {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        return connection;
     }
 
     public List<String> getCategories() {
@@ -50,7 +49,7 @@ public class OnlineShopService {
        Product product = new Product();
         try {
             Statement stm = connection.createStatement();
-            String myQuery = "select id, title, description, price\n" +
+            String myQuery = "select id, title, description, price, moneda\n" +
                     "from product\n" +
                     "where id = ?";
 
@@ -61,9 +60,11 @@ public class OnlineShopService {
             int productId = res.getInt("id");
             String title = res.getString("title");
             String description = res.getString("description");
-            String price = res.getString("price");
+            int price = res.getInt("price");
+            String moneda = res.getString("price");
             product.setId(productId);
             product.setTitle(title);
+            product.setCurrency(moneda);
             product.setDescription(description);
             product.setPrice(price);
             product.setImages(getImages(productId));
@@ -103,7 +104,7 @@ public class OnlineShopService {
         List<Product> productsList = new ArrayList<>();
             try {
                 Statement stm = connection.createStatement();
-                String queryProduct ="select title, price from product\n" +
+                String queryProduct ="select title, price, moneda from product\n" +
                         "where gender=? AND category_id=?";
                 PreparedStatement pstm = connection.prepareStatement(queryProduct);
                 pstm.setString(1, gender);
@@ -111,10 +112,12 @@ public class OnlineShopService {
                 ResultSet res = pstm.executeQuery();
                 while (res.next()) {
                     String title = res.getString("title");
-                    String price= res.getString("price");
+                    int price= res.getInt("price");
+                    String moneda = res.getString("moneda");
                     Product product = new Product();
                     product.setTitle(title);
                     product.setPrice(price);
+                    product.setCurrency(moneda);
                     productsList.add(product);
                 }
                 res.close();
@@ -127,6 +130,34 @@ public class OnlineShopService {
 
 
         }
+
+    public int addProduct(Product product) {
+        int productId = 0;
+        try {
+            String myQuery = "insert into product(id,title, description, price, currency, gender, category_id)" +
+                    "values(nextVal('product_id_seq'),?,?,?,?,?,null) RETURNING ID";
+
+            PreparedStatement pstm = connection.prepareStatement(myQuery);
+            pstm.setString(1,product.getTitle());
+            pstm.setString(2,product.getDescription());
+            pstm.setInt(3, product.getPrice());
+            pstm.setString(4,product.getCurrency());
+            pstm.setString(5,product.getGender());
+
+
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                productId = rs.getInt(1);
+            }
+
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println("ERROR" + e);
+            e.printStackTrace();
+        }
+
+        return productId;
+    }
 }
 
 

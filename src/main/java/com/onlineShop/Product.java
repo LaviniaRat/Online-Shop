@@ -7,7 +7,8 @@ public class Product {
     private String title;
     private String description;
     private List<String>images;
-    private String price;
+    private int price;
+    private String currency;
     private String gender;
     private int categoryId;
 
@@ -26,12 +27,16 @@ public class Product {
     }
 
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
     public String getGender() {
         return gender;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 
     public int getCategoryId() {
@@ -51,7 +56,7 @@ public class Product {
     }
 
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -69,5 +74,9 @@ public class Product {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

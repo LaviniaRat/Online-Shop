@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clothing Store | Ecommerce Website Design</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/design.css}" rel="stylesheet" />
+
+<body>
+<div class="container">
+    <h2>Adauga produs nou</h2>
+    <form class="form-horizontal" action="/admin" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="title">Nume produs:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" name="title"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Descriere produs :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="price">Pret :</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="price" name="price" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="currency">Moneda :</label>
+            <div class="col-sm-10">
+                <select id="currency" class="form-select" aria-label="Default select example" name="currency">
+                    <option value="RON" selected>RON</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="gender">Gen produs:</label>
+            <div class="col-sm-10">
+                <select id="gender" class="form-select" aria-label="Default select example" name="gender">
+                    <option value="MALE" selected>Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Adauga</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        <p th:text="'Product with id ' + ${productId} + ' was inserted!'" th:if="${productId > 0}"></p>
+        <p th:if="${productId == 0}">ERROR! Product was not inserted!</p>
+    </div>
+</div>
+
+</body>
+</html>
