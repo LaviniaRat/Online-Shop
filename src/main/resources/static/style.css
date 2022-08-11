@@ -8,12 +8,13 @@
 body{
     font-family: 'Poppins', sans-serif;
     width:100%;
+
 }
 
 .navbar-nav me-auto mb-2 mb-lg-0{
     display:flex;
-    align-items: right;
-    text-align:center;
+    align-items: left;
+    text-align:left;
     padding:20px;
 
 }
@@ -21,9 +22,10 @@ body{
 nav{
     display:flex;
     align-items: center;
-    padding:20px;
+    padding:0px;
     flex:1;
     text-align: right;
+    background-color:white;
 }
 
 nav ul{
@@ -38,7 +40,12 @@ nav ul li{
 
 }
 .nav-item1{
-padding-left:250px;
+    padding-left:0px;
+}
+
+.navbar-brand{
+   padding-left:200px;
+
 }
 
 a{
@@ -49,50 +56,30 @@ a{
 
 p{
     color:#555;
+}
+
+.home{
+margin-top:270px;
+}
+
+
+.product-image img{
+    margin-top:100px;
+    margin-left:100px;
+    width:1000px;
+}
+.button{
+     display: inline-block;
+        background: #ff523b;
+        color: #fff;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        transition: background 0.5s;
 
 }
 
-.container{
-    max-width:1300px;
-    margin:auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-}
-
-.col-2{
-    flex-basis:20%;
-    min-width: 300px;
-}
-
-.col-2 img{
-   width:400%;
-    padding-right:200px;
-}
-
-.col-2 h1{
-    font-size:30px;
-    line-height: 60px;
-    margin:0;
-}
-.btn{
-    display: inline-block;
-    background: #ff523b;
-    color: #fff;
-    padding: 8px 30px;
-    margin: 30px 0;
-    border-radius: 30px;
-    transition: background 0.5s;
-}
-
-.btn:hover{
+.button:hover{
     background: #563434;
 
 }
@@ -100,42 +87,19 @@ p{
 .header{
     background:radial-gradient(#fff,#ffd8d8);
 }
-.header .row{
-    margin-top:70px;
-}
+
 
 .categories{
     margin: 70px 0;
 
 }
 
-.col-3{
-    flex-basis:30%;
-    min-width:180px;
-    margin-bottom:30px;
-}
-
-.col-3 img{
-    width:80%;
-
-}
-
-.small-container{
-    max-width: 1080px;
-    margin: auto;
-    padding-left:25px;
-    padding-right: 25px;
-}
-
-.col-4{
-    flex-basis: 25%;
-    padding: 10px;
-    min-width: 200px;
-    margin-bottom: 50px;
-}
-
 .col-4 img{
     width:80%;
+}
+
+.futureProducts .col-3 img {
+    width:100%;
 }
 .title{
     text-align: center;
@@ -170,3 +134,68 @@ col-4 P{
 .rating .fa-star{
     color:#ff523b;
 }
+
+.icons-user{
+    display:inline-block;
+    padding: 10px 40px;
+    padding-left:400px;
+
+}
+.product-carousel img{
+    width:100px;
+}
+.center{
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center
+}
+
+.sidenav {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 60px;
+  left: 0;
+  background-color: #FFFFFF;
+  overflow-x: hidden;
+  padding-top:100px;
+
+}
+
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+
+
+}
+
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+ul {
+    list-style-type: none;
+}
+
+.card-body{
+    margin-top:70px;
+}
+
+.product{
+margin-top:200px;
+}
+
+#carouselExampleIndicators{
+   margin-top:100px;
+}
+
+
+
+
+
+
