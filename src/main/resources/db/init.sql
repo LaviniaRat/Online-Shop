@@ -58,3 +58,10 @@ CREATE TABLE ADDRESS
       role text  NOT NULL,
       phone integer
   )
+
+  create sequence product_id_seq start with 21
+
+  create table featuredProducts(
+  id int,
+  product_id int
+  )

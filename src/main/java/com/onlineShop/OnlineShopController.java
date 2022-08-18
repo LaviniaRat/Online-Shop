@@ -11,65 +11,67 @@ import java.util.List;
 
 @Controller
 public class OnlineShopController {
+
     @Autowired
-    private OnlineShopService onlineShopService;
+    private ProductService productService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private FeaturedProductsService featuredProductsService;
 
     @GetMapping("/home")
     public String homePage(Model model){
-        List<String> categoryList = onlineShopService.getCategories();
-        model.addAttribute("categoryList", categoryList);
+        List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
+        List<Category> menCategoryList = categoryService.getCategories("MALE");
+        model.addAttribute("womenCategoryList", womenCategoryList);
+        model.addAttribute("menCategoryList", menCategoryList);
+        List<Product> featuredProductsList=featuredProductsService.getFeaturedProducts();
+        model.addAttribute("featuredProductsList", featuredProductsList);
         return "home.html";
     }
 
     @GetMapping("/product")
     public String productPage(Model model, @RequestParam int productId){
-        System.out.println(productId);
-        List<String> categoryList = onlineShopService.getCategories();
-        model.addAttribute("categoryList", categoryList);
-        Product product = onlineShopService.getProduct(productId);
+
+        List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
+        List<Category> menCategoryList = categoryService.getCategories("MALE");
+        model.addAttribute("womenCategoryList", womenCategoryList);
+        model.addAttribute("menCategoryList", menCategoryList);
+        Product product = productService.getProduct(productId);
         model.addAttribute("product", product);
         return "product.html";
     }
 
     @GetMapping("/category")
-    public String categoryPage(Model model, @RequestParam String gender, @RequestParam int categoryId){
-        List<String> categoryList = onlineShopService.getCategories();
-        model.addAttribute("categoryList", categoryList);
-        System.out.println(gender);
-        //System.out.println(categoryId);
-        List<Product> productsList=onlineShopService.getCategoryOfProducts(gender,categoryId);
-        model.addAttribute("products", productsList);
+    public String categoryPage(Model model, @RequestParam int categoryId){
+        List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
+        List<Category> menCategoryList = categoryService.getCategories("MALE");
+        model.addAttribute("womenCategoryList", womenCategoryList);
+        model.addAttribute("menCategoryList", menCategoryList);
+
+        Category category = categoryService.getCategory(categoryId);
+        List<Category> sidebarCategories;
+        if (category.getGender().equals("FEMALE")) {
+            sidebarCategories = womenCategoryList;
+        } else {
+            sidebarCategories = menCategoryList;
+        }
+        model.addAttribute("sidebarCategories", sidebarCategories);
+        List<Product> productsList= productService.getProducts(categoryId);
+        model.addAttribute("productsList", productsList);
         return "category.html";
-
-
     }
 
-    @GetMapping("/admin")
-    public String adminPage(){
-        return "admin.html";
+    @GetMapping("/about")
+    public String aboutPage(Model model){
+        List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
+        List<Category> menCategoryList = categoryService.getCategories("MALE");
+        model.addAttribute("womenCategoryList", womenCategoryList);
+        model.addAttribute("menCategoryList", menCategoryList);
+        return "about.html";
     }
 
-    @PostMapping("/admin")
-    public String addProduct(@RequestParam String title,
-                             @RequestParam String description,
-                             @RequestParam int price,
-                             @RequestParam String gender,
-                             @RequestParam String currency,
-                             Model model
-                            ) {
-        System.out.println(title);
-        Product product = new Product();
-        product.setTitle(title);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setCurrency(currency);
-        product.setGender(gender);
-
-        int productId = onlineShopService.addProduct(product);
-        System.out.println(productId);
-        model.addAttribute("productId", productId);
-
-        return "admin.html";
-    }
 
 }
