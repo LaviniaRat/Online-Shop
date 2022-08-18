@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item1">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about">About Us</a>
@@ -25,8 +25,8 @@
                             Women
                         </a>
                         <ul class="dropdown-menu" >
-                            <li th:each="category: ${categoryList}">
-                                <a class="dropdown-item" th:href='@{/home(category=${category})}' th:text="${category}"></a>
+                            <li th:each="category: ${womenCategoryList}">
+                                <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}' th:text="${category.name}"></a>
                             </li>
                         </ul>
                     </li>
@@ -35,8 +35,8 @@
                             Men
                         </a>
                         <ul class="dropdown-menu" >
-                            <li th:each="category: ${categoryList}">
-                                <a class="dropdown-item" th:href='@{/home(category=${category})}' th:text="${category}"></a>
+                            <li th:each="category: ${menCategoryList}">
+                                <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}' th:text="${category.name}"></a>
                             </li>
                         </ul>
                     </li>
@@ -59,8 +59,8 @@
             <div class="col-1">
                 <div class="sidenav">
                     <ul>
-                        <li th:each="category: ${categoryList}">
-                        <a class="sidebar-list" th:href='@{/home(category=${category})}' th:text="${category}"></a>
+                        <li th:each="category: ${sidebarCategories}">
+                            <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}' th:text="${category.name}"></a>
                      </li>
                     </ul>
                 </div>
@@ -68,12 +68,16 @@
             <div class="col-11">
                 <div class="container">
                     <div class="row ">
-                        <div class="col-4" th:each="product: ${products}">
+                        <div class="col-4" th:each="product: ${productsList}">
                             <div class="card-body">
-                                <img class="card-img-top" src="/photos/p4.jpeg">
-                                <p class="product-title" th:text="${product.title}"> </p>
-                                <p class="price-tag product-price" th:text="${product.price}"></p><p th:text="${product.moneda}"></p>
-                            </div>
+                                <a th:href='@{/product(productId=${product.id})}'>
+                                 <img class="card-img-top" th:src="${'/photos/' + product.images[0]} ">
+                                </a>
+                                <a th:href='@{/product(productId=${product.id})}'>
+                                    <p class="product-title" th:text="${product.title}"></p>
+                                </a>
+                                <p class="price-tag product-price" th:text="${product.price} +' '+ ${product.currency}"></p>
+
                         </div>
                     </div>
                 </div>

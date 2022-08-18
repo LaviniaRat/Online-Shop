@@ -1,5 +1,6 @@
 package com.onlineShop;
 
+import javax.print.DocFlavor;
 import java.util.List;
 
 public class Product {
@@ -9,9 +10,7 @@ public class Product {
     private List<String>images;
     private int price;
     private String currency;
-    private String gender;
     private int categoryId;
-
 
 
     public int getId() {
@@ -26,13 +25,8 @@ public class Product {
         return description;
     }
 
-
     public int getPrice() {
         return price;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public String getCurrency() {
@@ -55,13 +49,8 @@ public class Product {
         this.description = description;
     }
 
-
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public void setCategoryId(int categoryId) {
@@ -79,4 +68,14 @@ public class Product {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    @Override
+
+    public String toString(){
+        StringBuilder sb= new StringBuilder();
+        sb.append(getTitle());
+        sb.append(this.getCategoryId());
+        return sb.toString();
+    }
+
 }
