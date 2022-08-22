@@ -130,8 +130,8 @@ col-4 P{
 
 .icons-user{
     display:inline-block;
-    padding: 10px 40px;
-    padding-left:200px;
+    padding-top:8px;
+
 }
 
 .product-carousel img{
@@ -214,3 +214,8 @@ ul {
 .featuredProduct{
     width:100%;
  }
+
+ .search{
+    padding-left:110px;
+    margin-right:0px;
+  }
