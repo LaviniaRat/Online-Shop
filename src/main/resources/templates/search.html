@@ -21,7 +21,7 @@
           <a class="nav-link" href="about">About Us</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Women
           </a>
           <ul class="dropdown-menu" >
@@ -41,18 +41,26 @@
           </ul>
         </li>
         <a class="navbar-brand" href="#">SPORTSWEAR</a>
-        <li class="icons-user">
-          <i class="fa-solid fa-user fa-xl"></i>
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+        <li class="search">
+          <form action="/search" class="d-flex" method="get" id="form" role="search">
+            <input type="text" id="word" name="word" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+            </button>
+          </form>
+        </li>
+        <li class="icons-user" >
           <i class="fa-solid fa-heart fa-xl"></i>
           <i class="fa-solid fa-bag-shopping fa-xl"></i>
         </li>
+
 
       </ul>
 
     </div>
   </div>
 </nav>
+
 
 <div class="container">
   <div class="row">
