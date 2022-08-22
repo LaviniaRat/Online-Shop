@@ -64,6 +64,15 @@ public class OnlineShopController {
         return "category.html";
     }
 
+
+    @GetMapping("/search")
+    public String searchProduct(@RequestParam String word, Model model){
+        List<Product> searchProductList= productService.searchProduct(word);
+        model.addAttribute("searchProductList", searchProductList);
+        return"search.html";
+    }
+
+
     @GetMapping("/about")
     public String aboutPage(Model model){
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");

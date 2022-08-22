@@ -131,7 +131,7 @@ col-4 P{
 .icons-user{
     display:inline-block;
     padding: 10px 40px;
-    padding-left:400px;
+    padding-left:200px;
 }
 
 .product-carousel img{
@@ -214,6 +214,3 @@ ul {
 .featuredProduct{
     width:100%;
  }
-
-
-

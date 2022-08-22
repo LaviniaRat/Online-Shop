@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -124,6 +125,41 @@ public class ProductService {
         }
 
         return productId;
+    }
+
+    public List<Product> searchProduct(String word){
+        List<Product> searchProductList= new ArrayList<>();
+        try{
+            Statement stm = dBconnectionService.getConnection().createStatement();
+            String searchProductQuery="select id, title,description, category_id, price, currency \n" +
+                    "from product\n" +
+                    "where title like '%" +word +"%' ";
+            PreparedStatement pstm=dBconnectionService.getConnection().prepareStatement(searchProductQuery);
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                int id=res.getInt("id");
+                String title = res.getString("title");
+                String description = res.getString("description");
+                int price= res.getInt("price");
+                String currency = res.getString("currency");
+                Product product = new Product();
+                product.setId(id);
+                product.setTitle(title);
+                product.setDescription(description);
+                product.setPrice(price);
+                product.setCurrency(currency);
+                product.setImages(getImages(id));
+                searchProductList.add(product);
+            }
+            res.close();
+            stm.close();
+        } catch (SQLException e) {
+            System.out.println("Error" + e);
+            e.printStackTrace();
+
+        }
+        System.out.println(Arrays.toString(searchProductList.toArray()));
+        return searchProductList;
     }
 }
 
