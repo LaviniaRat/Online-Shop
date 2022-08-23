@@ -1,6 +1,5 @@
 package com.onlineShop;
 
-import javax.print.DocFlavor;
 import java.util.List;
 
 public class Product {
@@ -70,7 +69,6 @@ public class Product {
     }
 
     @Override
-
     public String toString(){
         StringBuilder sb= new StringBuilder();
         sb.append(getTitle());

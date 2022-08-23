@@ -111,7 +111,6 @@ public class ProductService {
             pstm.setInt(3, product.getPrice());
             pstm.setString(4,product.getCurrency());
 
-
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
                 productId = rs.getInt(1);

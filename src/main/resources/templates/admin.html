@@ -12,6 +12,11 @@
 
 <body>
 <div class="container">
+    <br/>
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+    <br/>
+
+
     <h2>Adauga produs nou</h2>
     <form class="form-horizontal" action="/admin" method="post">
         <div class="form-group">
