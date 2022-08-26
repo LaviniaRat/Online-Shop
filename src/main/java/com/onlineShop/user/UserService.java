@@ -3,6 +3,7 @@ package com.onlineShop.user;
 import com.onlineShop.DBconnectionService;
 import com.onlineShop.auth.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -16,6 +17,9 @@ public class UserService {
 
     @Autowired
     private DBconnectionService dBconnectionService;
+
+    @Autowired
+    public BCryptPasswordEncoder passwordEncoder;
 
 
     public AppUser getUser(String username) {

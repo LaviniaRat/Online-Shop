@@ -2,15 +2,22 @@ package com.onlineShop.admin;
 
 import com.onlineShop.category.Category;
 import com.onlineShop.category.CategoryService;
+import com.onlineShop.product.FeaturedProductsService;
+import com.onlineShop.product.GenderProduct;
 import com.onlineShop.product.Product;
 import com.onlineShop.product.ProductService;
+import com.onlineShop.user.User;
 import com.onlineShop.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -23,6 +30,14 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    public BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private FeaturedProductsService featuredProductsService;
+
+
 
     @GetMapping("/admin/addProduct")
     public String adminPage() {
@@ -70,5 +85,44 @@ public class AdminController {
         model.addAttribute("categoryId", categoryId);
         return "/admin/addCat.html";
     }
+
+    @GetMapping("/admin/addUser")
+    public String addUserPage() {
+        return "/admin/addUser.html";
+    }
+
+    @PostMapping("/admin/addUser")
+    public String addUser(@RequestParam String email,
+                             @RequestParam String password,
+                             @RequestParam int phone,
+                             @RequestParam String userName,
+                             Model model
+    ) {
+        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+        password=encoder.encode(password);
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setName(userName);
+
+        int userId = userService.addUser(user);
+        model.addAttribute("userId", userId);
+        return "/admin/addUser.html";
+    }
+
+
+    @GetMapping("/admin/addFP")
+    public String addFPPage(Model model){
+        List<GenderProduct> allGenderProductsList=featuredProductsService.getAllGenderProducts();
+        List<Integer> featuredProductsList=featuredProductsService.getFeaturedProducts();
+        model.addAttribute("allGenderProductsList", allGenderProductsList);
+        model.addAttribute("featuredProductsList", featuredProductsList);
+
+        return "/admin/addFP.html";
+    }
+
+
+
 
 }
