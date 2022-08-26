@@ -26,7 +26,7 @@ public class AdminController {
 
     @GetMapping("/admin/addProduct")
     public String adminPage() {
-        return "addProduct.html";
+        return "/admin/addProduct.html";
     }
 
     @PostMapping("/admin/addProduct")
@@ -46,12 +46,12 @@ public class AdminController {
         int productId = productService.addProduct(product);
         System.out.println(productId);
         model.addAttribute("productId", productId);
-        return "addProduct.html";
+        return "/admin/addProduct.html";
     }
 
     @GetMapping("/admin/addCat")
     public String addCatPage() {
-        return "addCat.html";
+        return "/admin/addCat.html";
     }
 
 
@@ -68,7 +68,7 @@ public class AdminController {
         int categoryId = categoryService.addCategory(category);
         System.out.println(categoryId);
         model.addAttribute("categoryId", categoryId);
-        return "addCat.html";
+        return "/admin/addCat.html";
     }
 
 }
