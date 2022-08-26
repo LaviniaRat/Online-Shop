@@ -1,4 +1,4 @@
-package com.onlineShop;
+package com.onlineShop.category;
 
 public class Category {
     private int id;

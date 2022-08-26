@@ -1,5 +1,6 @@
-package com.onlineShop;
+package com.onlineShop.category;
 
+import com.onlineShop.DBconnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,8 +60,30 @@ public class CategoryService {
             e.printStackTrace();
         }
         return category;
+    }
 
+    public int addCategory(Category category) {
+        int categoryId=0;
+        try {
+            String myQuery = "insert into category(id,name, gender) " +
+                    "values(nextVal('category_id_seq'),?,?) RETURNING ID";
 
+            PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
+            pstm.setString(1,category.getName());
+            pstm.setString(2, category.getGender());
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                categoryId = rs.getInt(1);
+
+            }
+
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println("ERROR" + e);
+            e.printStackTrace();
+        }
+
+        return categoryId;
     }
 
 }

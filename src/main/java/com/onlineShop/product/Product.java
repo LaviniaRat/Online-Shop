@@ -1,4 +1,4 @@
-package com.onlineShop;
+package com.onlineShop.product;
 
 import java.util.List;
 
