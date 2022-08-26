@@ -1,4 +1,4 @@
-package com.onlineShop.auth;
+package com.onlineShop.user;
 
 import com.onlineShop.DBconnectionService;
 import com.onlineShop.auth.AppUser;
@@ -42,5 +42,31 @@ public class UserService {
         }
 
         return appUser;
+    }
+
+
+    public int addUser(User user) {
+        int userId=0;
+        try {
+            String myQuery = "insert into users(id,email,password, phone, user_name) " +
+                    "values(nextVal('user_id_seq'),?,?,?,?) RETURNING ID";
+
+            PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
+            pstm.setString(1,user.getEmail());
+            pstm.setString(2, user.getPassword());
+            pstm.setInt(3, user.getPhone());
+            pstm.setString(4, user.getName());
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                userId = rs.getInt(1);
+            }
+
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println("ERROR" + e);
+            e.printStackTrace();
+        }
+
+        return userId;
     }
 }

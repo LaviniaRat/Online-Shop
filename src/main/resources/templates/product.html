@@ -100,7 +100,7 @@
                     <p class="product" th:text="${product.title}"></p>
                     <p class="price">Price:</p>
                     <p class="price-tag product-price"th:text="${product.price} +' '+ ${product.currency}"></p>
-                    <button type="button" class="button">Add to cart</button>
+                    <a href="addToCart?id=product.getId()" class="button">Add to cart</a>
                 </div>
             </div>
         </div>

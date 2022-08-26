@@ -1,5 +1,6 @@
-package com.onlineShop;
+package com.onlineShop.product;
 
+import com.onlineShop.DBconnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class ProductService {
         return product;
     }
 
-     List<String> getImages(int productId) {
+     public List<String> getImages(int productId) {
         List<String> imagesList = new ArrayList<>();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
@@ -103,7 +104,7 @@ public class ProductService {
         int productId = 0;
         try {
             String myQuery = "insert into product(id,title, description, price, currency, category_id)" +
-                    "values(nextVal('product_id_seq'),?,?,?,?,?,null) RETURNING ID";
+                    "values(nextVal('product_id_seq'),?,?,?,?,null) RETURNING ID";
 
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
             pstm.setString(1,product.getTitle());
@@ -111,9 +112,11 @@ public class ProductService {
             pstm.setInt(3, product.getPrice());
             pstm.setString(4,product.getCurrency());
 
+
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
                 productId = rs.getInt(1);
+
             }
 
             pstm.close();
