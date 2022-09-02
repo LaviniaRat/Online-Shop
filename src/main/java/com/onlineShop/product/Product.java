@@ -6,7 +6,7 @@ public class Product {
     private int id;
     private String title;
     private String description;
-    private List<String>images;
+    private List<String> images;
     private int price;
     private String currency;
     private int categoryId;
@@ -69,8 +69,8 @@ public class Product {
     }
 
     @Override
-    public String toString(){
-        StringBuilder sb= new StringBuilder();
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(getTitle());
         sb.append(this.getCategoryId());
         return sb.toString();

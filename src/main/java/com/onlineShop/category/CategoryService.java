@@ -17,13 +17,13 @@ public class CategoryService {
         List<Category> categoryList = new ArrayList<>();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
-            String categoryQuery="select id, name from category  " +
+            String categoryQuery = "select id, name from categories  " +
                     "where gender=? ";
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(categoryQuery);
-            pstm.setString(1,gender);
-            ResultSet res=pstm.executeQuery();
+            pstm.setString(1, gender);
+            ResultSet res = pstm.executeQuery();
             while (res.next()) {
-                int id= res.getInt("id");
+                int id = res.getInt("id");
                 String name = res.getString("name");
                 Category category = new Category();
                 category.setId(res.getInt("id"));
@@ -43,7 +43,7 @@ public class CategoryService {
         Category category = new Category();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
-            String myQuery = "select id, name, gender from category " +
+            String myQuery = "select id, name, gender from categories " +
                     "where id = ?";
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
             pstm.setInt(1, categoryId);
@@ -63,16 +63,16 @@ public class CategoryService {
     }
 
     public int addCategory(Category category) {
-        int categoryId=0;
+        int categoryId = 0;
         try {
-            String myQuery = "insert into category(id,name, gender) " +
+            String myQuery = "insert into categories(id,name, gender) " +
                     "values(nextVal('category_id_seq'),?,?) RETURNING ID";
 
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
-            pstm.setString(1,category.getName());
+            pstm.setString(1, category.getName());
             pstm.setString(2, category.getGender());
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 categoryId = rs.getInt(1);
 
             }

@@ -36,12 +36,6 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>tomcat</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>5.0.18</version>
-        </dependency>
-
     </dependencies>
 
     <properties>
