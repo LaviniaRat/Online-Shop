@@ -2,7 +2,7 @@ package com.onlineShop.admin;
 
 import com.onlineShop.category.Category;
 import com.onlineShop.category.CategoryService;
-import com.onlineShop.product.FeaturedProductsService;
+import com.onlineShop.product.FeaturedProductService;
 import com.onlineShop.product.GenderProduct;
 import com.onlineShop.product.Product;
 import com.onlineShop.product.ProductService;
@@ -15,8 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -35,8 +36,7 @@ public class AdminController {
     public BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private FeaturedProductsService featuredProductsService;
-
+    private FeaturedProductService featuredProductService;
 
 
     @GetMapping("/admin/addProduct")
@@ -93,13 +93,13 @@ public class AdminController {
 
     @PostMapping("/admin/addUser")
     public String addUser(@RequestParam String email,
-                             @RequestParam String password,
-                             @RequestParam int phone,
-                             @RequestParam String userName,
-                             Model model
+                          @RequestParam String password,
+                          @RequestParam int phone,
+                          @RequestParam String userName,
+                          Model model
     ) {
-        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-        password=encoder.encode(password);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        password = encoder.encode(password);
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
@@ -113,16 +113,18 @@ public class AdminController {
 
 
     @GetMapping("/admin/addFP")
-    public String addFPPage(Model model){
-        List<GenderProduct> allGenderProductsList=featuredProductsService.getAllGenderProducts();
-        List<Integer> featuredProductsList=featuredProductsService.getFeaturedProducts();
+    public String addFPPage(Model model) {
+        List<GenderProduct> allGenderProductsList = featuredProductService.getAllGenderProducts();
+        List<Integer> featuredProductsList = featuredProductService.getFeaturedProducts();
         model.addAttribute("allGenderProductsList", allGenderProductsList);
         model.addAttribute("featuredProductsList", featuredProductsList);
 
         return "/admin/addFP.html";
     }
 
-
-
-
+    @PostMapping("/admin/addFP")
+    public ModelAndView updateFPPage(Model model, @RequestParam List<Integer> featuredProductsList) {
+        featuredProductService.updateFeaturedProduct(featuredProductsList);
+        return new ModelAndView("redirect:/admin/addFP");
+    }
 }

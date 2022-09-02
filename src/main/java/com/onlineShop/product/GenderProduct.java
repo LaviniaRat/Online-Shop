@@ -8,7 +8,7 @@ public class GenderProduct {
     private String gender;
     private int price;
     private String currency;
-    private List<String>images;
+    private List<String> images;
 
     public List<String> getImages() {
         return images;

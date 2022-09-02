@@ -50,18 +50,18 @@ public class UserService {
 
 
     public int addUser(User user) {
-        int userId=0;
+        int userId = 0;
         try {
             String myQuery = "insert into users(id,email,password, phone, user_name) " +
                     "values(nextVal('user_id_seq'),?,?,?,?) RETURNING ID";
 
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
-            pstm.setString(1,user.getEmail());
+            pstm.setString(1, user.getEmail());
             pstm.setString(2, user.getPassword());
             pstm.setInt(3, user.getPhone());
             pstm.setString(4, user.getName());
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 userId = rs.getInt(1);
             }
 

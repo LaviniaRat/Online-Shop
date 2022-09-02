@@ -2,7 +2,7 @@ package com.onlineShop;
 
 import com.onlineShop.category.Category;
 import com.onlineShop.category.CategoryService;
-import com.onlineShop.product.FeaturedProductsService;
+import com.onlineShop.product.FeaturedProductService;
 import com.onlineShop.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +18,22 @@ public class OnlineShopController {
     private CategoryService categoryService;
 
     @Autowired
-    private FeaturedProductsService featuredProductsService;
+    private FeaturedProductService featuredProductService;
 
     @GetMapping("/home")
-    public String homePage(Model model){
+    public String homePage(Model model) {
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
         List<Category> menCategoryList = categoryService.getCategories("MALE");
         model.addAttribute("womenCategoryList", womenCategoryList);
         model.addAttribute("menCategoryList", menCategoryList);
-        List<Product> featuredProductsList=featuredProductsService.displayFeaturedProducts();
+        List<Product> featuredProductsList = featuredProductService.displayFeaturedProducts();
         model.addAttribute("featuredProductsList", featuredProductsList);
         return "home.html";
     }
 
 
     @GetMapping("/about")
-    public String aboutPage(Model model){
+    public String aboutPage(Model model) {
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
         List<Category> menCategoryList = categoryService.getCategories("MALE");
         model.addAttribute("womenCategoryList", womenCategoryList);

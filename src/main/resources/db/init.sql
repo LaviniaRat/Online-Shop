@@ -60,16 +60,29 @@ CREATE TABLE ADDRESS
   create sequence category_id_seq start with 21
   create sequence user_id_seq start with 2
   create sequence address_id_seq start with 2
+  create sequence id start with 1
+  create sequence customer_id_seq start with 2
+  create sequence cart_id_seq start with 1
+  create sequence order_id_seq start with 1
 
   create table featuredProducts(
       id int,
       product_id int
   )
 
-  CREATE TABLE CART_ITEM
-    (
-        id integer NOT NULL,
-        product_id integer NOT NULL,
-        customer_id integer,
-       quantity integer NOT NULL
+ create table cartItem(
+ cart_id int primary key not null,
+ product_id int,
+ quantity int,
+ order_id int
+ )
+
+    create table customers(
+    id int primary key not null,
+    name varchar(50),
+    email varchar(50),
+    address varchar(200),
+    city varchar(50),
+    country varchar(50),
+    zip int
     )

@@ -15,11 +15,11 @@ public class ProductService {
     private DBconnectionService dBconnectionService;
 
     public Product getProduct(int id) {
-       Product product = new Product();
+        Product product = new Product();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
             String myQuery = "select id, title, description, price, currency " +
-                    "from product " +
+                    "from products " +
                     "where id = ?";
 
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
@@ -47,7 +47,7 @@ public class ProductService {
         return product;
     }
 
-     public List<String> getImages(int productId) {
+    public List<String> getImages(int productId) {
         List<String> imagesList = new ArrayList<>();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
@@ -69,19 +69,19 @@ public class ProductService {
         return imagesList;
     }
 
-    public List<Product> getProducts(int categoryId){
+    public List<Product> getProducts(int categoryId) {
         List<Product> productsList = new ArrayList<>();
         try {
             Statement stm = dBconnectionService.getConnection().createStatement();
-            String queryProduct ="select id, title, price, currency from product\n" +
+            String queryProduct = "select id, title, price, currency from products " +
                     "where category_id=?";
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(queryProduct);
             pstm.setInt(1, categoryId);
             ResultSet res = pstm.executeQuery();
             while (res.next()) {
-                int id=res.getInt("id");
+                int id = res.getInt("id");
                 String title = res.getString("title");
-                int price= res.getInt("price");
+                int price = res.getInt("price");
                 String currency = res.getString("currency");
                 Product product = new Product();
                 product.setId(id);
@@ -103,18 +103,18 @@ public class ProductService {
     public int addProduct(Product product) {
         int productId = 0;
         try {
-            String myQuery = "insert into product(id,title, description, price, currency, category_id)" +
+            String myQuery = "insert into products(id,title, description, price, currency, category_id)" +
                     "values(nextVal('product_id_seq'),?,?,?,?,null) RETURNING ID";
 
             PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(myQuery);
-            pstm.setString(1,product.getTitle());
-            pstm.setString(2,product.getDescription());
+            pstm.setString(1, product.getTitle());
+            pstm.setString(2, product.getDescription());
             pstm.setInt(3, product.getPrice());
-            pstm.setString(4,product.getCurrency());
+            pstm.setString(4, product.getCurrency());
 
 
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 productId = rs.getInt(1);
 
             }
@@ -128,20 +128,20 @@ public class ProductService {
         return productId;
     }
 
-    public List<Product> searchProduct(String word){
-        List<Product> searchProductList= new ArrayList<>();
-        try{
+    public List<Product> searchProduct(String word) {
+        List<Product> searchProductList = new ArrayList<>();
+        try {
             Statement stm = dBconnectionService.getConnection().createStatement();
-            String searchProductQuery="select id, title,description, category_id, price, currency \n" +
-                    "from product\n" +
-                    "where title like '%" +word +"%' ";
-            PreparedStatement pstm=dBconnectionService.getConnection().prepareStatement(searchProductQuery);
+            String searchProductQuery = "select id, title,description, category_id, price, currency \n" +
+                    "from products " +
+                    "where title like '%" + word + "%' ";
+            PreparedStatement pstm = dBconnectionService.getConnection().prepareStatement(searchProductQuery);
             ResultSet res = pstm.executeQuery();
             while (res.next()) {
-                int id=res.getInt("id");
+                int id = res.getInt("id");
                 String title = res.getString("title");
                 String description = res.getString("description");
-                int price= res.getInt("price");
+                int price = res.getInt("price");
                 String currency = res.getString("currency");
                 Product product = new Product();
                 product.setId(id);

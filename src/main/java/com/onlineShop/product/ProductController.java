@@ -20,7 +20,7 @@ public class ProductController {
 
 
     @GetMapping("/product")
-    public String productPage(Model model, @RequestParam int productId){
+    public String productPage(Model model, @RequestParam int productId) {
 
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
         List<Category> menCategoryList = categoryService.getCategories("MALE");
@@ -32,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping("/category")
-    public String categoryPage(Model model, @RequestParam int categoryId){
+    public String categoryPage(Model model, @RequestParam int categoryId) {
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
         List<Category> menCategoryList = categoryService.getCategories("MALE");
         model.addAttribute("womenCategoryList", womenCategoryList);
@@ -46,19 +46,18 @@ public class ProductController {
             sidebarCategories = menCategoryList;
         }
         model.addAttribute("sidebarCategories", sidebarCategories);
-        List<Product> productsList= productService.getProducts(categoryId);
+        List<Product> productsList = productService.getProducts(categoryId);
         model.addAttribute("productsList", productsList);
         return "category.html";
     }
 
 
     @GetMapping("/search")
-    public String searchProduct(@RequestParam String word, Model model){
-        List<Product> searchProductList= productService.searchProduct(word);
+    public String searchProduct(@RequestParam String word, Model model) {
+        List<Product> searchProductList = productService.searchProduct(word);
         model.addAttribute("searchProductList", searchProductList);
-        return"search.html";
+        return "search.html";
     }
-
 
 
 }

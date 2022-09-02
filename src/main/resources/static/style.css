@@ -228,3 +228,25 @@ ul {
     margin-top:100px;
 }
 
+.shoppingCartPhoto{
+    margin-top:30px;
+    width:150px;
+ }
+
+ #item{
+    width:100px;
+ }
+
+#totalitem{
+    margin-top:100px;
+ }
+
+.customerInfo{
+    margin-top:100px;
+ }
+
+.order-placed{
+    margin-top:300px;
+    margin=left:300px;
+ }
+

@@ -5,3 +5,7 @@
 ![Screenshot](mainPage.jpeg?raw=true "Home Page")
 ![Screenshot](productsPage.jpeg?raw=true "Products Page")
 ![Screenshot](singleProductPage.jpeg?raw=true "Product Page")
+![Screenshot](addProduct.jpeg?raw=true "Admin Page")
+![Screenshot](addCat.jpeg?raw=true "Admin Page")
+![Screenshot](addFP.jpeg?raw=true "Admin Page")
+![Screenshot](addUser.jpeg?raw=true "Admin Page")

@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 public class DBconnectionService {
     private Connection connection = null;
 
-    public DBconnectionService(){
+    public DBconnectionService() {
         connectTodb("onlineShop", "postgres", "java");
     }
 

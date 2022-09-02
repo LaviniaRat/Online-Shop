@@ -6,8 +6,8 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private  int addressId;
-    private  int phone;
+    private int addressId;
+    private int phone;
 
     public int getUserId() {
         return userId;
