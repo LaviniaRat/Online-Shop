@@ -46,7 +46,12 @@ public class ShoppingCartController {
         for (Integer id : cart.getShoppingCartList()) {
             shoppingCartProductsList.add(productService.getProduct(id));
         }
+        int totalPrice = 0;
+        for (Product product : shoppingCartProductsList) {
+            totalPrice += product.getPrice();
+        }
         model.addAttribute("shoppingCartProductsList", shoppingCartProductsList);
+        model.addAttribute("totalPrice", totalPrice);
         List<Category> womenCategoryList = categoryService.getCategories("FEMALE");
         List<Category> menCategoryList = categoryService.getCategories("MALE");
         model.addAttribute("womenCategoryList", womenCategoryList);
