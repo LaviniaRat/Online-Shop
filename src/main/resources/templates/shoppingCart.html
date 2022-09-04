@@ -12,57 +12,56 @@
               integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar fixed-top navbar-expand-lg">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item1">
-                            <a class="nav-link" aria-current="page" href="home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about">About Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Women
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li th:each="category: ${womenCategoryList}">
-                                    <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}'
-                                       th:text="${category.name}"></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Men
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li th:each="category: ${menCategoryList}">
-                                    <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}'
-                                       th:text="${category.name}"></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <a class="navbar-brand" href="#">SPORTSWEAR</a>
-                        <li class="search">
-                            <form action="/search" class="d-flex" method="get" id="form" role="search">
-                                <input type="text" id="word" name="word" placeholder="Search" aria-label="Search">
-                                <button class="btn" type="submit">
-                                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-                                </button>
-                            </form>
-                        </li>
-                        <li class="icons-appUser">
-                            <i class="fa-solid fa-heart fa-xl"></i>
+    <nav class="navbar fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item1">
+                        <a class="nav-link" aria-current="page" href="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Women
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li th:each="category: ${womenCategoryList}">
+                                <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}' th:text="${category.name}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Men
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li th:each="category: ${menCategoryList}">
+                                <a class="dropdown-item" th:href='@{/category(categoryId=${category.id})}' th:text="${category.name}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <a class="navbar-brand" href="#">SPORTSWEAR</a>
+                    <li class="search">
+                        <form action="/search" class="d-flex" method="get" id="form" role="search">
+                            <input type="text" id="word" name="word" placeholder="Search" aria-label="Search">
+                            <button class="btn" type="submit">
+                                <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                            </button>
+                        </form>
+                    </li>
+                    </li>
+                    <li class="icons-appUser">
+                        <a class="nav-link" aria-current="page" href="shoppingCart">
                             <i class="fa-solid fa-bag-shopping fa-xl"></i>
-                        </li>
-                    </ul>
-                </div>
+                            <i class="fa badge fa-lg" th:value="${#lists.size(session.ShoppingCart?.shoppingCartList)}" th:if="${session.ShoppingCart} != null">&#xf290;</i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
         <div class="container">
             <form action="/orders" method="post" role="submit">
                 <div class="row ">
@@ -95,7 +94,8 @@
                         </div>
                     </div>
                     <div class="col-6" id="totalitem">
-                        <h2>Total Price:</h2>
+                        <h2>Total Price (RON):</h2>
+                        <h2  th:text="${totalPrice}"></h2>
 
                         <div class="form-row customerInfo">
                             <div class="form-group col-md-6">
